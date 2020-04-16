@@ -3,25 +3,22 @@ export const schema = {
   "properties": {
     "audio_channel": {
       "title": "Channel",
-      "type": "number",
+      "type": "integer",
       "default": 1
+    },
+    "media_entry": {
+      "title": "Media Entry",
+      "type": "string"
     },
     "format": {
       "title": "Subtitle format",
-      "oneOf": [{
-        "enum": ["SRT"],
-        "title": "SRT"
-      }, {
-        "enum": ["TTML"],
-        "title": "TTML"
-      }, {
-        "enum": ["RAW"],
-        "title": "RAW"
-      }],
+      "type": "string",
+      "enum": ["SRT","TTML","RAW"],
       "default": "SRT"
     },
-    "type": {
+    "service": {
       "title": "Type",
+      "type": "string",
       "oneOf": [{
         "const": "CHOOSE",
         "title": "Choose automatically"
@@ -30,7 +27,7 @@ export const schema = {
         "title": "EML"
       }, {
         "const": "SPEECHMATICS",
-        "title": "Specchmatics"
+        "title": "Speechmatics"
       }, {
         "const": "VERITONE",
         "title": "Veritone"
@@ -40,32 +37,32 @@ export const schema = {
       }, {
         "const": "WATSON",
         "title": "Watson"
-      }],
-      "default": "CHOOSE"
+      }]
     }
   },
   "allOf": [{
       "if": {
         "properties": {
-          "type": {
-            "enum": ["EML"]
+          "service": {
+            "const": "EML"
           }
         }
       },
       "then": {
         "properties": {
           "language": {
+            "type": "string",
             "oneOf": [{
-              "enum": ["ENGLISH_UNITED_STATES"],
+              "const": "ENGLISH_UNITED_STATES",
               "title": "English (United States)"
             }, {
-              "enum": ["FRENCH"],
+              "const": "FRENCH",
               "title": "French (France)"
             }, {
-              "enum": ["GERMAN"],
+              "const": "GERMAN",
               "title": "German"
             }, {
-              "enum": ["ITALIAN"],
+              "const": "ITALIAN",
               "title": "Italian"
             }]
           }
@@ -75,100 +72,101 @@ export const schema = {
     {
       "if": {
         "properties": {
-          "type": {
-            "enum": ["SPEECHMATICS"]
+          "service": {
+            "const": "SPEECHMATICS"
           }
         }
       },
       "then": {
         "properties": {
           "language": {
+            "type": "string",
             "oneOf": [{
-              "enum": ["ARABIC"],
+              "const": "ARABIC",
               "title": "Arabic (Modern Standard)"
             }, {
-              "enum": ["BULGARIAN"],
+              "const": "BULGARIAN",
               "title": "Bulgarian"
             }, {
-              "enum": ["CATALAN"],
+              "const": "CATALAN",
               "title": "Catalan (Spain)"
             }, {
-              "enum": ["CHINESE_MANDARIN"],
+              "const": "CHINESE_MANDARIN",
               "title": "Chinese, Mandarin"
             }, {
-              "enum": ["CZECH"],
+              "const": "CZECH",
               "title": "Czech Republic"
             }, {
-              "enum": ["DANISH"],
+              "const": "DANISH",
               "title": "Danish"
             }, {
-              "enum": ["GERMAN"],
+              "const": "GERMAN",
               "title": "German"
             }, {
-              "enum": ["DUTCH"],
+              "const": "DUTCH",
               "title": "Dutch"
             }, {
-              "enum": ["GREEK"],
+              "const": "GREEK",
               "title": "Greek"
             }, {
-              "enum": ["ENGLISH_GLOBAL"],
+              "const": "ENGLISH_GLOBAL",
               "title": "English (Global)"
             }, {
-              "enum": ["SPANISH"],
+              "const": "SPANISH",
               "title": "Spanish (Spain)"
             }, {
-              "enum": ["FINNISH"],
+              "const": "FINNISH",
               "title": "Finnish (Finland)"
             }, {
-              "enum": ["FRENCH"],
+              "const": "FRENCH",
               "title": "French (France)"
             }, {
-              "enum": ["HINDI"],
+              "const": "HINDI",
               "title": "Hindi"
             }, {
-              "enum": ["CROATIAN"],
+              "const": "CROATIAN",
               "title": "Croatian"
             }, {
-              "enum": ["HUNGARIAN"],
+              "const": "HUNGARIAN",
               "title": "Hungarian"
             }, {
-              "enum": ["ITALIAN"],
+              "const": "ITALIAN",
               "title": "Italian"
             }, {
-              "enum": ["JAPANESE"],
+              "const": "JAPANESE",
               "title": "Japanese"
             }, {
-              "enum": ["KOREAN"],
+              "const": "KOREAN",
               "title": "Korean (South Korea)"
             }, {
-              "enum": ["LATVIAN"],
+              "const": "LATVIAN",
               "title": "Latvian"
             }, {
-              "enum": ["LITHUANIAN"],
+              "const": "LITHUANIAN",
               "title": "Lithuanian"
             }, {
-              "enum": ["NORWEGIAN"],
+              "const": "NORWEGIAN",
               "title": "Norwegian"
             }, {
-              "enum": ["POLISH"],
+              "const": "POLISH",
               "title": "Polish"
             }, {
-              "enum": ["PORTUGUESE"],
+              "const": "PORTUGUESE",
               "title": "Portuguese (Portugal)"
             }, {
-              "enum": ["ROMANIAN"],
+              "const": "ROMANIAN",
               "title": "Romanian"
             }, {
-              "enum": ["RUSSIAN"],
+              "const": "RUSSIAN",
               "title": "Russian"
             }, {
-              "enum": ["SLOVAK"],
+              "const": "SLOVAK",
               "title": "Slovak"
             }, {
-              "enum": ["SLOVENIAN"],
+              "const": "SLOVENIAN",
               "title": "Slovenian"
             }, {
-              "enum": ["SWEDISH"],
+              "const": "SWEDISH",
               "title": "Swedish"
             }]
           }
@@ -178,136 +176,137 @@ export const schema = {
     {
       "if": {
         "properties": {
-          "type": {
-            "enum": ["VERITONE"]
+          "service": {
+            "const": "VERITONE"
           }
         }
       },
       "then": {
         "properties": {
           "language": {
+            "type": "string",
             "oneOf": [{
-              "enum": ["ARABIC_SAUDI_ARABIA"],
+              "const": "ARABIC_SAUDI_ARABIA",
               "title": "Arabic (Saudi Arabia)"
             }, {
-              "enum": ["ARABIC"],
+              "const": "ARABIC",
               "title": "Arabic (Modern Standard)"
             }, {
-              "enum": ["CATALAN"],
+              "const": "CATALAN",
               "title": "Catalan (Spain)"
             }, {
-              "enum": ["CHINESE_CANTONESE"],
+              "const": "CHINESE_CANTONESE",
               "title": "Chinese, Cantonese"
             }, {
-              "enum": ["CHINESE_MANDARIN"],
+              "const": "CHINESE_MANDARIN",
               "title": "Chinese, Mandarin"
             }, {
-              "enum": ["CHINESE_MANDARIN_TAIWAN"],
+              "const": "CHINESE_MANDARIN_TAIWAN",
               "title": "Chinese, Mandarin (Taiwan)"
             }, {
-              "enum": ["CROATIAN"],
+              "const": "CROATIAN",
               "title": "Croatian"
             }, {
-              "enum": ["CZECH"],
+              "const": "CZECH",
               "title": "Czech Republic"
             }, {
-              "enum": ["DUTCH"],
+              "const": "DUTCH",
               "title": "Dutch"
             }, {
-              "enum": ["GERMAN"],
+              "const": "GERMAN",
               "title": "German"
             }, {
-              "enum": ["ENGLISH_AUSTRALIA"],
+              "const": "ENGLISH_AUSTRALIA",
               "title": "English (Australia)"
             }, {
-              "enum": ["ENGLISH_CANADA"],
+              "const": "ENGLISH_CANADA",
               "title": "English (Canada)"
             }, {
-              "enum": ["ENGLISH_INDIA"],
+              "const": "ENGLISH_INDIA",
               "title": "English (India)"
             }, {
-              "enum": ["ENGLISH_SOUTH_AFRICA"],
+              "const": "ENGLISH_SOUTH_AFRICA",
               "title": "English (South Africa)"
             }, {
-              "enum": ["ENGLISH_UNITED_KINGDOM"],
+              "const": "ENGLISH_UNITED_KINGDOM",
               "title": "English (United Kingdom)"
             }, {
-              "enum": ["ENGLISH_UNITED_STATES"],
+              "const": "ENGLISH_UNITED_STATES",
               "title": "English (United States)"
             }, {
-              "enum": ["SPANISH_ARGENTINA"],
+              "const": "SPANISH_ARGENTINA",
               "title": "Spanish (Argentina)"
             }, {
-              "enum": ["SPANISH_CHILE"],
+              "const": "SPANISH_CHILE",
               "title": "Spanish (Chile)"
             }, {
-              "enum": ["SPANISH_COLOMBIA"],
+              "const": "SPANISH_COLOMBIA",
               "title": "Spanish (Colombia)"
             }, {
-              "enum": ["SPANISH_GUATEMALA"],
+              "const": "SPANISH_GUATEMALA",
               "title": "Spanish (Guatemala)"
             }, {
-              "enum": ["SPANISH_MEXICO"],
+              "const": "SPANISH_MEXICO",
               "title": "Spanish (Mexico)"
             }, {
-              "enum": ["SPANISH_UNITED_STATES"],
+              "const": "SPANISH_UNITED_STATES",
               "title": "Spanish (United States)"
             }, {
-              "enum": ["SPANISH"],
+              "const": "SPANISH",
               "title": "Spanish (Spain)"
             }, {
-              "enum": ["FRENCH_CANADA"],
+              "const": "FRENCH_CANADA",
               "title": "French (Canada)"
             }, {
-              "enum": ["FRENCH"],
+              "const": "FRENCH",
               "title": "French (France)"
             }, {
-              "enum": ["GREEK"],
+              "const": "GREEK",
               "title": "Greek"
             }, {
-              "enum": ["HEBREW"],
+              "const": "HEBREW",
               "title": "Hebrew"
             }, {
-              "enum": ["HINDI"],
+              "const": "HINDI",
               "title": "Hindi"
             }, {
-              "enum": ["ITALIAN"],
+              "const": "ITALIAN",
               "title": "Italian"
             }, {
-              "enum": ["JAPANESE"],
+              "const": "JAPANESE",
               "title": "Japanese"
             }, {
-              "enum": ["KOREAN"],
+              "const": "KOREAN",
               "title": "Korean (South Korea)"
             }, {
-              "enum": ["MALAY"],
+              "const": "MALAY",
               "title": "Malay"
             }, {
-              "enum": ["NORWEGIAN"],
+              "const": "NORWEGIAN",
               "title": "Norwegian"
             }, {
-              "enum": ["POLISH"],
+              "const": "POLISH",
               "title": "Polish"
             }, {
-              "enum": ["PORTUGUESE_BRAZILIAN"],
+              "const": "PORTUGUESE_BRAZILIAN",
               "title": "Portuguese (Brazil)"
             }, {
-              "enum": ["PORTUGUESE"],
+              "const": "PORTUGUESE",
               "title": "Portuguese (Portugal)"
             }, {
-              "enum": ["ROMANIAN"],
+              "const": "ROMANIAN",
               "title": "Romanian"
             }, {
-              "enum": ["RUSSIAN"],
+              "const": "RUSSIAN",
               "title": "Russian"
             }, {
-              "enum": ["SWEDISH"],
+              "const": "SWEDISH",
               "title": "Swedish"
             }, {
-              "enum": ["THAI"],
+              "const": "THAI",
               "title": "Thai"
             }, {
-              "enum": ["TURKISH"],
+              "const": "TURKISH",
               "title": "Turkish"
             }]
           }
@@ -317,16 +316,17 @@ export const schema = {
     {
       "if": {
         "properties": {
-          "type": {
-            "enum": ["VOCAPIA"]
+          "service": {
+            "const": "VOCAPIA"
           }
         }
       },
       "then": {
         "properties": {
           "language": {
+            "type": "string",
             "oneOf": [{
-              "enum": ["FRENCH"],
+              "const": "FRENCH",
               "title": "French (France)"
             }]
           }
@@ -336,61 +336,62 @@ export const schema = {
     {
       "if": {
         "properties": {
-          "type": {
-            "enum": ["WATSON"]
+          "service": {
+            "const": "WATSON"
           }
         }
       },
       "then": {
         "properties": {
           "language": {
+            "type": "string",
             "oneOf": [{
-              "enum": ["ARABIC"],
+              "const": "ARABIC",
               "title": "Arabic (Modern Standard)"
             }, {
-              "enum": ["CATALAN"],
+              "const": "CATALAN",
               "title": "Catalan (Spain)"
             }, {
-              "enum": ["CHINESE_MANDARIN"],
+              "const": "CHINESE_MANDARIN",
               "title": "Chinese, Mandarin"
             }, {
-              "enum": ["GERMAN"],
+              "const": "GERMAN",
               "title": "German"
             }, {
-              "enum": ["ENGLISH_UNITED_KINGDOM"],
+              "const": "ENGLISH_UNITED_KINGDOM",
               "title": "English (United Kingdom)"
             }, {
-              "enum": ["ENGLISH_UNITED_STATES"],
+              "const": "ENGLISH_UNITED_STATES",
               "title": "English (United States)"
             }, {
-              "enum": ["SPANISH_ARGENTINA"],
+              "const": "SPANISH_ARGENTINA",
               "title": "Spanish (Argentina)"
             }, {
-              "enum": ["SPANISH_CHILE"],
+              "const": "SPANISH_CHILE",
               "title": "Spanish (Chile)"
             }, {
-              "enum": ["SPANISH_COLOMBIA"],
+              "const": "SPANISH_COLOMBIA",
               "title": "Spanish (Colombia)"
             }, {
-              "enum": ["SPANISH_MEXICO"],
+              "const": "SPANISH_MEXICO",
               "title": "Spanish (Mexico)"
             }, {
-              "enum": ["SPANISH_PERU"],
+              "const": "SPANISH_PERU",
               "title": "Spanish (Peru)"
             }, {
-              "enum": ["SPANISH"],
+              "const": "SPANISH",
               "title": "Spanish (Spain)"
             }, {
-              "enum": ["FRENCH"],
+              "const": "FRENCH",
               "title": "French (France)"
             }, {
-              "enum": ["JAPANESE"],
+              "const": "JAPANESE",
               "title": "Japanese"
             }, {
-              "enum": ["KOREAN"],
+              "const": "KOREAN",
               "title": "Korean (South Korea)"
             }, {
-              "enum": ["PORTUGUESE_BRAZILIAN"],
+              "const": "PORTUGUESE_BRAZILIAN",
               "title": "Portuguese (Brazil)"
             }]
           }
@@ -400,166 +401,167 @@ export const schema = {
     {
       "if": {
         "properties": {
-          "type": {
-            "enum": ["CHOOSE"]
+          "service": {
+            "const": "CHOOSE"
           }
         }
       },
       "then": {
         "properties": {
+          "type": "string",
           "language": {
             "oneOf": [{
-              "enum": ["ARABIC_SAUDI_ARABIA"],
+              "const": "ARABIC_SAUDI_ARABIA",
               "title": "Arabic (Saudi Arabia)"
             }, {
-              "enum": ["ARABIC"],
+              "const": "ARABIC",
               "title": "Arabic (Modern Standard)"
             }, {
-              "enum": ["BULGARIAN"],
+              "const": "BULGARIAN",
               "title": "Bulgarian"
             }, {
-              "enum": ["CATALAN"],
+              "const": "CATALAN",
               "title": "Catalan (Spain)"
             }, {
-              "enum": ["CHINESE_CANTONESE"],
+              "const": "CHINESE_CANTONESE",
               "title": "Chinese, Cantonese"
             }, {
-              "enum": ["CHINESE_MANDARIN"],
+              "const": "CHINESE_MANDARIN",
               "title": "Chinese, Mandarin"
             }, {
-              "enum": ["CHINESE_MANDARIN_TAIWAN"],
+              "const": "CHINESE_MANDARIN_TAIWAN",
               "title": "Chinese, Mandarin (Taiwan)"
             }, {
-              "enum": ["CROATIAN"],
+              "const": "CROATIAN",
               "title": "Croatian"
             }, {
-              "enum": ["CZECH"],
+              "const": "CZECH",
               "title": "Czech Republic"
             }, {
-              "enum": ["DANISH"],
+              "const": "DANISH",
               "title": "Danish"
             }, {
-              "enum": ["GERMAN"],
+              "const": "GERMAN",
               "title": "German"
             }, {
-              "enum": ["DUTCH"],
+              "const": "DUTCH",
               "title": "Dutch"
             }, {
-              "enum": ["ENGLISH_AUSTRALIA"],
+              "const": "ENGLISH_AUSTRALIA",
               "title": "English (Australia)"
             }, {
-              "enum": ["ENGLISH_CANADA"],
+              "const": "ENGLISH_CANADA",
               "title": "English (Canada)"
             }, {
-              "enum": ["ENGLISH_GLOBAL"],
+              "const": "ENGLISH_GLOBAL",
               "title": "English (Global)"
             }, {
-              "enum": ["ENGLISH_INDIA"],
+              "const": "ENGLISH_INDIA",
               "title": "English (India)"
             }, {
-              "enum": ["ENGLISH_UNITED_KINGDOM"],
+              "const": "ENGLISH_UNITED_KINGDOM",
               "title": "English (United Kingdom)"
             }, {
-              "enum": ["ENGLISH_UNITED_STATES"],
+              "const": "ENGLISH_UNITED_STATES",
               "title": "English (United States)"
             }, {
-              "enum": ["ENGLISH_SOUTH_AFRICA"],
+              "const": "ENGLISH_SOUTH_AFRICA",
               "title": "English (South Africa)"
             }, {
-              "enum": ["SPANISH_ARGENTINA"],
+              "const": "SPANISH_ARGENTINA",
               "title": "Spanish (Argentina)"
             }, {
-              "enum": ["SPANISH_CHILE"],
+              "const": "SPANISH_CHILE",
               "title": "Spanish (Chile)"
             }, {
-              "enum": ["SPANISH_COLOMBIA"],
+              "const": "SPANISH_COLOMBIA",
               "title": "Spanish (Colombia)"
             }, {
-              "enum": ["SPANISH_GUATEMALA"],
+              "const": "SPANISH_GUATEMALA",
               "title": "Spanish (Guatemala)"
             }, {
-              "enum": ["SPANISH_MEXICO"],
+              "const": "SPANISH_MEXICO",
               "title": "Spanish (Mexico)"
             }, {
-              "enum": ["SPANISH_PERU"],
+              "const": "SPANISH_PERU",
               "title": "Spanish (Peru)"
             }, {
-              "enum": ["SPANISH_UNITED_STATES"],
+              "const": "SPANISH_UNITED_STATES",
               "title": "Spanish (United States)"
             }, {
-              "enum": ["SPANISH"],
+              "const": "SPANISH",
               "title": "Spanish (Spain)"
             }, {
-              "enum": ["FINNISH"],
+              "const": "FINNISH",
               "title": "Finnish (Finland)"
             }, {
-              "enum": ["FRENCH_CANADA"],
+              "const": "FRENCH_CANADA",
               "title": "French (Canada)"
             }, {
-              "enum": ["FRENCH"],
+              "const": "FRENCH",
               "title": "French (France)"
             }, {
-              "enum": ["GREEK"],
+              "const": "GREEK",
               "title": "Greek"
             }, {
-              "enum": ["HEBREW"],
+              "const": "HEBREW",
               "title": "Hebrew"
             }, {
-              "enum": ["HINDI"],
+              "const": "HINDI",
               "title": "Hindi"
             }, {
-              "enum": ["HUNGARIAN"],
+              "const": "HUNGARIAN",
               "title": "Hungarian"
             }, {
-              "enum": ["ITALIAN"],
+              "const": "ITALIAN",
               "title": "Italian"
             }, {
-              "enum": ["JAPANESE"],
+              "const": "JAPANESE",
               "title": "Japanese"
             }, {
-              "enum": ["KOREAN"],
+              "const": "KOREAN",
               "title": "Korean (South Korea)"
             }, {
-              "enum": ["LATVIAN"],
+              "const": "LATVIAN",
               "title": "Latvian"
             }, {
-              "enum": ["LITHUANIAN"],
+              "const": "LITHUANIAN",
               "title": "Lithuanian"
             }, {
-              "enum": ["MALAY"],
+              "const": "MALAY",
               "title": "Malay"
             }, {
-              "enum": ["NORWEGIAN"],
+              "const": "NORWEGIAN",
               "title": "Norwegian"
             }, {
-              "enum": ["POLISH"],
+              "const": "POLISH",
               "title": "Polish"
             }, {
-              "enum": ["PORTUGUESE_BRAZILIAN"],
+              "const": "PORTUGUESE_BRAZILIAN",
               "title": "Portuguese (Brazil)"
             }, {
-              "enum": ["PORTUGUESE"],
+              "const": "PORTUGUESE",
               "title": "Portuguese (Portugal)"
             }, {
-              "enum": ["ROMANIAN"],
+              "const": "ROMANIAN",
               "title": "Romanian"
             }, {
-              "enum": ["RUSSIAN"],
+              "const": "RUSSIAN",
               "title": "Russian"
             }, {
-              "enum": ["SLOVAK"],
+              "const": "SLOVAK",
               "title": "Slovak"
             }, {
-              "enum": ["SLOVENIAN"],
+              "const": "SLOVENIAN",
               "title": "Slovenian"
             }, {
-              "enum": ["SWEDISH"],
+              "const": "SWEDISH",
               "title": "Swedish"
             }, {
-              "enum": ["THAI"],
+              "const": "THAI",
               "title": "Thai"
             }, {
-              "enum": ["TURKISH"],
+              "const": "TURKISH",
               "title": "Turkish"
             }]
           }
@@ -567,6 +569,5 @@ export const schema = {
       }
     }
   ],
-  "additionalProperties": false,
   "required": ["media_entry", "language"]
 }

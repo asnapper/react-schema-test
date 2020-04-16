@@ -14,8 +14,14 @@ import {schema} from '../schema'
 //   }
 // };
 
+const uiSchema = {
+  service: {
+      "ui:widget": "hidden"
+  }
+}
+
 export const App = () => {
-    return <Form schema={schema} />
+    return <Form schema={schema} uiSchema={uiSchema} />
 }
 
 export default App
